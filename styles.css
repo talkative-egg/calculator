@@ -1,0 +1,22 @@
+#container{
+    background-color: black;
+    color: white;
+    margin-left: 25%;
+    margin-right: auto;
+    display: grid;
+    grid-template-rows: repeat(6, 80px);
+    grid-template-columns: repeat(4, 80px);
+    grid-template-areas: 
+        "display display display display"
+        "clear delete factorial divide"
+        "seven eight nine multiply"
+        "four five six subtract"
+        "one two three add"
+        "dot zero opposite equals";
+    width: 320px;
+}
+
+#display{
+    grid-area: display;
+    text-align: right;
+}
