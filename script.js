@@ -5,6 +5,7 @@ const equals = document.querySelector("#equals");
 const clearButton = document.querySelector("#clear");
 const deleteButton = document.querySelector("#delete");
 const factorialButton = document.querySelector("#factorial");
+const oppositeButton = document.querySelector("#opposite");
 let displayNumber = display.textContent;
 let firstOperand = "";
 let clearScreen = false;
@@ -16,7 +17,11 @@ numbers.forEach(e => {
             display.textContent = 0;
             clearScreen = false;
         }
-        display.textContent = parseInt(display.textContent) * 10 + parseInt(e.getAttribute("value"));
+        if(display.textContent == 0){
+            display.textContent = e.getAttribute("value");
+        }else{
+            display.textContent = display.textContent + e.getAttribute("value");
+        }
         displayNumber = parseInt(display.textContent);
     });
 });
@@ -44,6 +49,11 @@ equals.addEventListener("click", function(){
 clearButton.addEventListener("click", function(){
     display.textContent = 0;
     displayNumber = 0;
+    firstOperand = "";
+});
+
+oppositeButton.addEventListener("click", function(){
+    display.textContent = (-1) * parseInt(display.textContent);
 });
 
 deleteButton.addEventListener("click", function(){
