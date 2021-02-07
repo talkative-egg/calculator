@@ -1,3 +1,7 @@
+html{
+    background-color: white;
+}
+
 h1{
     text-align: center;
 }
@@ -7,8 +11,8 @@ h2{
 }
 
 #container{
-    background-color: black;
-    color: white;
+    background-color: #100F10;
+    color: #F7F7FE;
     margin-left: auto;
     margin-right: auto;
     display: grid;
@@ -26,6 +30,14 @@ h2{
 
 button{
     font-size: 30px;
+    background-color: #F7F7FE;
+    color: #100F10;
+}
+
+button:hover{
+    cursor: pointer;
+    background-color: #100F10;
+    color: #F7F7FE;
 }
 
 #display{
