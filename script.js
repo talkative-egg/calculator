@@ -13,18 +13,18 @@ let clearScreen = false;
 let operation;
 
 numbers.forEach(e => {
-    e.addEventListener("click", function(){
-        if(clearScreen == true){
-            display.textContent = 0;
-            clearScreen = false;
-        }
-        if(display.textContent == 0){
-            display.textContent = e.getAttribute("value");
-        }else{
-            display.textContent = display.textContent + e.getAttribute("value");
-        }
-        displayNumber = parseInt(display.textContent);
-    });
+    e.addEventListener("click", e => enterNumber(e.target));
+});
+
+window.addEventListener("keydown", e => {
+    const input = document.querySelector(`[value="${e.key}"]`);
+    if(input.className == "number"){
+        enterNumber(input);
+    }else if(input.className == "delete"){
+        backspace();
+    }else if(input.className == "dot"){
+        addDot();
+    }
 });
 
 operators.forEach(e => {
@@ -38,9 +38,7 @@ operators.forEach(e => {
     });
 });
 
-dotButton.addEventListener("click", function(){
-    display.textContent = display.textContent + ".";
-});
+dotButton.addEventListener("click", addDot);
 
 factorialButton.addEventListener("click", function(){
     display.textContent = factorial(parseInt(display.textContent));
@@ -61,9 +59,33 @@ oppositeButton.addEventListener("click", function(){
     display.textContent = (-1) * parseFloat(display.textContent);
 });
 
-deleteButton.addEventListener("click", function(){
+deleteButton.addEventListener("click", backspace);
+
+function addDot(){
+    if(!display.textContent.includes(".")){
+        display.textContent = display.textContent + ".";
+    }
+}
+
+function backspace(){
     display.textContent = display.textContent.substring(0, display.textContent.length - 1);
-});
+    if(display.textContent == ""){
+        display.textContent = 0;
+    }
+}
+
+function enterNumber(e){
+    if(clearScreen == true){
+        display.textContent = 0;
+        clearScreen = false;
+    }
+    if(display.textContent == 0){
+        display.textContent = e.getAttribute("value");
+    }else{
+        display.textContent = display.textContent + e.getAttribute("value");
+    }
+    displayNumber = parseInt(display.textContent);
+}
 
 function operate(string, a, b){
     switch(string){
