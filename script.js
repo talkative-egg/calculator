@@ -6,6 +6,7 @@ const clearButton = document.querySelector("#clear");
 const deleteButton = document.querySelector("#delete");
 const factorialButton = document.querySelector("#factorial");
 const oppositeButton = document.querySelector("#opposite");
+const dotButton = document.querySelector("#dot");
 let displayNumber = display.textContent;
 let firstOperand = "";
 let clearScreen = false;
@@ -29,12 +30,16 @@ numbers.forEach(e => {
 operators.forEach(e => {
     e.addEventListener("click", function(){
         if(firstOperand != ""){
-            display.textContent = operate(operation, firstOperand, parseInt(display.textContent));
+            display.textContent = operate(operation, firstOperand, parseFloat(display.textContent));
         }
         operation = e.textContent
-        firstOperand = parseInt(display.textContent);
+        firstOperand = parseFloat(display.textContent);
         clearScreen = true;
     });
+});
+
+dotButton.addEventListener("click", function(){
+    display.textContent = display.textContent + ".";
 });
 
 factorialButton.addEventListener("click", function(){
@@ -53,11 +58,11 @@ clearButton.addEventListener("click", function(){
 });
 
 oppositeButton.addEventListener("click", function(){
-    display.textContent = (-1) * parseInt(display.textContent);
+    display.textContent = (-1) * parseFloat(display.textContent);
 });
 
 deleteButton.addEventListener("click", function(){
-    display.textContent = parseInt(display.textContent / 10);
+    display.textContent = display.textContent.substring(0, display.textContent.length - 1);
 });
 
 function operate(string, a, b){
@@ -69,6 +74,9 @@ function operate(string, a, b){
         case '×':
             return multiply(a,b);
         case '÷':
+            if(b == 0){
+                return "you can't do that";
+            }
             return divide(a,b);
         default:
             return "What???";
@@ -88,7 +96,7 @@ function multiply(a, b){
 }
 
 function divide(a, b){
-    return (parseFloat(a)/b == a/b)? (a/b) : (parseFloat(a)/b);
+    return a / b;
 }
 
 function factorial(a){
